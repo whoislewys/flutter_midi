@@ -1,57 +1,44 @@
-# Flutter plugins
-
-[![Awesome Flutter](https://img.shields.io/badge/Awesome-Flutter-blue.svg?longCache=true&style=flat-square)](https://github.com/Solido/awesome-flutter)
 [![Buy Me A Coffee](https://img.shields.io/badge/Donate-Buy%20Me%20A%20Coffee-yellow.svg)](https://www.buymeacoffee.com/rodydavis)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WSH3GVC49GNNJ)
 
-This repo is a companion repo to the main [flutter
-repo](https://github.com/flutter/flutter). It contains the source code for
-Flutter third-party plugins (i.e., plugins developed by Rody Davis).
-Check the `packages` directory for all plugins.
+# flutter_midi
 
-Flutter plugins enable access to platform-specific APIs. For more information
-about plugins, and how to use them, see
-[https://flutter.io/platform-plugins/](https://flutter.io/platform-plugins/).
+A FLutter Plugin to Play midi on iOS and Android. This uses SoundFont (.sf2) Files.
 
-## Issues
+## Instalation
 
-Please file any issues, bugs, or feature requests in the [
-repo](https://github.com/AppleEducate/plugins/issues/new).
+Download a sound font file, example: `sound_font.SF2` file [here.](https://drive.google.com/file/d/1Oaw_AYVp7BNb7_U9NqgAj9c8r4ALpXw3/view?usp=sharing)
 
-## Contributing
+Create an /assets folder and store the .sf2 files
 
-If you wish to contribute a new plugin to the Flutter ecosystem, please
-see the documentation for [developing packages](https://flutter.io/developing-packages/) and
-[platform channels](https://flutter.io/platform-channels/). You can store
-your plugin source code in any GitHub repository. Once your plugin
-is ready you can [publish](https://flutter.io/developing-packages/#publish)
-to the [pub repository](https://pub.dartlang.org/).
+Update pubspec.yaml
 
-If you wish to contribute a change to any of the existing plugins in this repo,
-please review our [contribution guide](https://github.com/AppleEducate/plugins/blob/master/CONTRIBUTING.md),
-and send a [pull request](https://github.com/AppleEducate/plugins/pulls).
+``` ruby
+assets:
+   - assets/sf2/Piano.SF2
+   - assets/sf2/SmallTimGM6mb.sf2
+```
+ 
+Load the sound font to prepare to play;
 
-## Plugins
-These are the available plugins in this repository.
+```dart
+ @override
+  void initState() {
+    load('assets/sf2/Piano.SF2');
+    super.initState();
+  }
+  
+ void load(String asset) async {
+    FlutterMidi.unmute(); // Optionally Unmute
+    ByteData _byte = await rootBundle.load(asset);
+    FlutterMidi.prepare(sf2: _byte);
+  }
+```
 
-| Plugin | Pub |
-|--------|-----|
-| [get_version](https://github.com/appleeducate/get_version/) | [![pub package](https://img.shields.io/pub/v/get_version.svg)](https://pub.dartlang.org/packages/get_version) |
-| [app_review](https://github.com/appleeducate/app_review/) | [![pub package](https://img.shields.io/pub/v/app_review.svg)](https://pub.dartlang.org/packages/app_review) |
-| [flutter_sms](https://github.com/appleeducate/flutter_sms/) | [![pub package](https://img.shields.io/pub/v/flutter_sms.svg)](https://pub.dartlang.org/packages/flutter_sms) |
-| [flutter_whatsnew](./packages/flutter_whatsnew/) | [![pub package](https://img.shields.io/pub/v/flutter_whatsnew.svg)](https://pub.dartlang.org/packages/flutter_whatsnew) |
-| [native_widgets](https://github.com/appleeducate/native_widgets/) | [![pub package](https://img.shields.io/pub/v/native_widgets.svg)](https://pub.dartlang.org/packages/native_widgets) |
-| [number_control](./packages/number_control/) | [![pub package](https://img.shields.io/pub/v/number_control.svg)](https://pub.dartlang.org/packages/number_control) |
-| [flutter_midi](./packages/flutter_midi/) | [![pub package](https://img.shields.io/pub/v/flutter_midi.svg)](https://pub.dartlang.org/packages/flutter_midi) |
-| [cupertino_controllers](./packages/cupertino_controllers/) | [![pub package](https://img.shields.io/pub/v/cupertino_controllers.svg)](https://pub.dartlang.org/packages/cupertino_controllers) |
-| [persist_theme](https://github.com/appleeducate/persist_theme/) | [![pub package](https://img.shields.io/pub/v/persist_theme.svg)](https://pub.dartlang.org/packages/persist_theme) |
-| [data_tables](./packages/data_tables/) | [![pub package](https://img.shields.io/pub/v/data_tables.svg)](https://pub.dartlang.org/packages/data_tables) |
-| [dynamic_tabs](./packages/dynamic_tabs/) | [![pub package](https://img.shields.io/pub/v/dynamic_tabs.svg)](https://pub.dartlang.org/packages/dynamic_tabs) |
-| [sheet_music](./packages/sheet_music/) | [![pub package](https://img.shields.io/pub/v/sheet_music.svg)](https://pub.dartlang.org/packages/sheet_music) |
-| [floating_search_bar](./packages/floating_search_bar/) | [![pub package](https://img.shields.io/pub/v/floating_search_bar.svg)](https://pub.dartlang.org/packages/floating_search_bar) |
-| [responsive_scaffold](https://github.com/fluttercommunity/responsive_scaffold/) | [![pub package](https://img.shields.io/pub/v/responsive_scaffold.svg)](https://pub.dartlang.org/packages/responsive_scaffold) |
-| [mobile_popup](./packages/mobile_popup/) | [![pub package](https://img.shields.io/pub/v/mobile_popup.svg)](https://pub.dartlang.org/packages/mobile_popup) |
-| [mobile_sidebar](./packages/mobile_sidebar/) | [![pub package](https://img.shields.io/pub/v/mobile_sidebar.svg)](https://pub.dartlang.org/packages/mobile_sidebar) |
-| [dart_firebase](./packages/dart_firebase/) | [![pub package](https://img.shields.io/pub/v/dart_firebase.svg)](https://pub.dartlang.org/packages/dart_firebase) |
-| [breakpoint](https://github.com/appleeducate/breakpoint/) | [![pub package](https://img.shields.io/pub/v/breakpoint.svg)](https://pub.dartlang.org/packages/breakpoint) |
-| [fb_auth](https://github.com/appleeducate/fb_auth/) | [![pub package](https://img.shields.io/pub/v/fb_auth.svg)](https://pub.dartlang.org/packages/fb_auth) |
+Play and Stop the Midi Notes
+
+```dart
+ FlutterMidi.playMidiNote(midi: 60);
+
+ FlutterMidi.stopMidiNote(midi: 60);
+```
